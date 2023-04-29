@@ -1,0 +1,54 @@
+.logindiv{
+    background: #3c6382;
+}
+.loginform{
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 17px 35px 0px;
+    gap: 20px;
+    background-color: #ffff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+  }
+  
+  .loginform input {
+    width: 330px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid #111;
+    background-color: #D9D9D9;
+    padding-left: 1vh;
+    font-size: 15px;
+  } 
+  
+  .loginform select {
+    width: 340px;
+    height: 45px;
+    border-radius: 12px;
+    background-color: #D9D9D9;
+    border: 1px solid #111;
+    padding-left: 1vh;
+    font-size: 15px;
+  }
+  .loginform button {
+    margin-top: 1vh;
+    background: #3c6382;
+    color: #ffff;
+    width: 150px;
+    height: 41px;
+    font-size: 20px;
+    border-radius: 12px;
+  } 
+  .logindiv{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .icona :first-child{
+    width: 73px;
+    height: 73px;
+  }
