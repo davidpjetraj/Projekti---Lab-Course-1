@@ -1,11 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import {Login} from './Login';
+import {Home} from './pages/Home';
+import {Header} from './pages/Header';
+import {Sidebar} from './pages/Sidebar';
+import Datetime from './pages/Datetime';
 
 function App() {
   return (
     <div className="App">
-      < Login />
+      < Header />
+      <div className='Body'>
+      < Sidebar />
+      < Home />
+      < Datetime />
+      </div>
     </div>
   );
 }
