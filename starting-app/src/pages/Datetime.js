@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-var datetime = ()=>{
+const DateTime = () => {
+  const [date, setDate] = useState(new Date());
 
-    var showdate=new Date();
-    var displaytodaysdate=showdate.getDate()+'/'+(showdate.getMonth()+1)+'/'+showdate.getFullYear();
-    var dt=showdate.toDateString();
-    var displattime=showdate.getHours()+':'+showdate.getMinutes();
-    
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDate(new Date());
+    }, 60000);
+    return () => clearInterval(timer);
+  }, []);
 
-    return(
-        <div>
-            {dt}
-            <br/>
-            <br/>
-            {displaytodaysdate} <br/>
-            {displattime}
-        </div>
-    )
-}
+  const displaytodaysdate =
+    date.getDate() +
+    "/" +
+    (date.getMonth() + 1) +
+    "/" +
+    date.getFullYear() +
+    " " +
+    date.getHours() +
+    ":" +
+    date.getMinutes();
 
-export default datetime;
+  return <div className="timer">{displaytodaysdate}</div>;
+};
+
+export default DateTime;

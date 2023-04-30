@@ -10,8 +10,10 @@ function App() {
       < Header />
       <div className='Body'>
       < Sidebar />
-      < Home />
-      < Datetime />
+        <div>
+          < Datetime />
+          < Home />
+        </div>
       </div>
     </div>
   );
