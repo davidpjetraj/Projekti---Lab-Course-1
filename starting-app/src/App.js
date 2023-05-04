@@ -5,6 +5,7 @@ import {Sidebar} from './pages/Sidebar';
 import Datetime from './pages/Datetime';
 import {Order} from './pages/Order';
 import { Routes , Route } from 'react-router-dom';
+import Products from './Products';
 
 function App() {
   return (
@@ -21,9 +22,15 @@ function App() {
                   <Order/>
         </div>
       </div>
-    </div></>
-    
-    
+    </div>
+
+
+    <Routes>
+    <Route path='/products' element={ < Products /> } />
+    </Routes>
+
+
+    </>
   );
 }
 

@@ -26,27 +26,7 @@ header .name {
   font-size: 23px;
   padding-left: 10px;
 }
-header .searchbar{
-  width: 450px;
-  height: 58px;
-  font-family: 'Quicksand';
-  background: #ECF3F5;
-  border-radius: 10px;
-  padding-left: 10px;
-  border: none;
-}
-.search{
-  display: flex;
-}
-.search button{
-  border: none;
-  background: none;
-  margin-left: -40px;
-  padding-right: 2vw;
-}
-.searchicon{
-  font-size: 35px;
-}
+
 .useri{
   display: flex;
   align-items: center;
@@ -86,6 +66,13 @@ header .searchbar{
 .sidebari .active{
   color: #00314b;
 }
+.sidebari .buttoni {
+  text-decoration: none;
+  color: #bdbdbd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /****************************** App.js CSS **************************** */
 .Body{
@@ -103,10 +90,14 @@ header .searchbar{
 /****************************** Home CSS **************************** */
 .body{
   display: flex;
-  border-right: 1px groove #999999;
-  height: 87.2vh;
   width: 60vw;
   max-width: 60vw;
+}
+.mainbody{
+  display: flex;
+  flex-direction: column;
+  height: 87.2vh;
+  border-right: 1px groove #999999;
 }
 .box{
   display: flex;
@@ -140,6 +131,21 @@ header .searchbar{
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+}
+
+.tabela{
+  padding: 4vh 0 0 4vw;
+  
+
+}
+table{
+    border: 1px solid #7f8c8d;
+    width: 50vw;
+}
+td{
+    border: 1px solid #7f8c8d;
+    border-collapse: collapse;
+    padding: 5px;
 }
 
 /****************************** Order CSS **************************** */
