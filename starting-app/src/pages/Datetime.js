@@ -6,7 +6,7 @@ const DateTime = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setDate(new Date());
-    }, 15000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 

@@ -1,5 +1,5 @@
 import { RiAccountCircleFill } from "react-icons/ri";
-import { useRoutes } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
     return (
@@ -17,7 +17,7 @@ export const Login = () => {
             </select>
             <input type="text" placeholder="Username ..." />
             <input type="password" placeholder="Password ..." />
-            <button type="submit" >Login</button>
+            <button type="submit"><Link to='/app'>Login</Link></button>
         </form>
         </>
         </div>
