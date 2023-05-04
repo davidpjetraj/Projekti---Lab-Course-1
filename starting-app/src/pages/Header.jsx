@@ -9,10 +9,6 @@ export const Header = () => {
             <div className="name">
                 <h1>UBT - Market</h1>
             </div>
-            <div className="search">
-                <input className="searchbar" type="search" placeholder="Search product or any order..." />
-                <button ><FiSearch className="searchicon"/></button>
-            </div>
           </div>
           <div>
             <div className="useri">
