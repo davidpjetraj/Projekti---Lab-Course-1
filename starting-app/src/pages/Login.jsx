@@ -17,7 +17,7 @@ export const Login = () => {
             </select>
             <input type="text" placeholder="Username ..." />
             <input type="password" placeholder="Password ..." />
-            <button type="submit"><Link to='/app'>Login</Link></button>
+            <button type="submit"><Link to='/app' className="loginbutton">Login</Link></button>
         </form>
         </>
         </div>
