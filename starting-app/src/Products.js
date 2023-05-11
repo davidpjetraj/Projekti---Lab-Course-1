@@ -1,9 +1,10 @@
 import './App.css';
-import {Home} from './pages/Home';
+import {Produktet} from './pages/Produktet';
 import {Header} from './pages/Header';
 import {Sidebar} from './pages/Sidebar';
 import Datetime from './pages/Datetime';
-import {Order} from './pages/Order';
+
+
 function Products() {
     return(
         <div className="App">
@@ -13,7 +14,7 @@ function Products() {
            <div className='Body'>
                 <div>
                   < Datetime />
-                  < Home />
+                  < Produktet />
                 </div>
                   
         </div>

@@ -57,7 +57,8 @@ header .name {
 }
 .sidebari {
   height: 89.9vh;
-  width: 8vw;
+  width: 5.5vw;
+  padding: 0 0.4vw;
   gap: 5vh;
   display: flex;
   flex-direction: column;
@@ -84,7 +85,7 @@ header .name {
 .timer{
   font-size: 18px;
   padding: 3px 0 0 5px;
-  border-right: 1px groove #95a5a6;
+  
 }
 
 /****************************** Home CSS **************************** */
@@ -97,6 +98,8 @@ header .name {
   display: flex;
   flex-direction: column;
   height: 87.2vh;
+  margin-top: -25px;
+  padding-top: 25px;
   border-right: 1px groove #999999;
 }
 .box{
@@ -135,15 +138,15 @@ header .name {
 
 .tabela{
   padding: 4vh 0 0 4vw;
-  
-
+  font-family: 'Quicksand';
+  text-align: center;
 }
-table{
-    border: 1px solid #7f8c8d;
+.tabela table{
+    
     width: 50vw;
 }
-td{
-    border: 1px solid #7f8c8d;
+.tabela td{
+    border-bottom: 1px groove #999999;
     border-collapse: collapse;
     padding: 5px;
 }
@@ -185,4 +188,57 @@ td{
   text-align: center;
   text-transform: uppercase;
   color: #000000;
+}
+
+
+/****************************** Products CSS **************************** */
+
+.searchi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5vh 0 0 2vw;
+  width: 90vw;
+}
+.searchi input{
+  width: 245px;
+  height: 40px;
+
+  background: #ECF3F5;
+  border-radius: 10px;
+
+  font-family: 'Quicksand';
+  font-size: 15px;
+  padding-left: 7px;
+  border: none;
+}
+
+.searchi button{
+  width: 120px;
+  height: 35px;
+  font-family: 'Inter';
+  font-size: 15px;
+  color: #ffff;
+  background: #1A8FDD;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3vw;
+  border: none;
+  cursor: pointer;
+}
+
+.tabelaa{
+  padding: 4vh 0 0 4vw;
+  font-family: 'Quicksand';
+  text-align: center;
+}
+.tabelaa table{
+    width: 85vw;
+}
+.tabelaa td{
+    border-bottom: 1px groove #99999956;
+    border-collapse: collapse;
+    padding: 5px;
 }
