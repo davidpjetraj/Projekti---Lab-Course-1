@@ -43,29 +43,16 @@ header .name {
 
 /****************************** Sidebar CSS **************************** */
 
-.sidebari button{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.sidebari ul{
+  text-decoration: none;
   font-size: 23px;
-  background: none;
   border: none;
-  color: #bdbdbd;
-  padding-top: 1vh;
   font-family: 'Quicksand';
   cursor: pointer;
+  list-style: none;
 }
-.sidebari {
-  height: 89.9vh;
-  width: 5.5vw;
-  padding: 0 0.4vw;
-  gap: 5vh;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px groove #95a5a6;
-}
-.sidebari .active{
-  color: #00314b;
+.sidebari li{
+  padding-top: 1.5vh;
 }
 .sidebari .buttoni {
   text-decoration: none;
@@ -73,6 +60,27 @@ header .name {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.sidebari a {
+  text-decoration: none;
+}
+.sidebari .icona{
+  font-size: 30px;
+}
+
+.sidebari {
+  height: 89.9vh;
+  width: 5.5vw;
+  padding: 0 0.6vw;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px groove #bdbdbd;
+}
+.sidebari .active .buttoni{
+  color: #2E636E;
+}
+.sidebari li:hover{
+  color: #2e2e2e;
 }
 
 /****************************** App.js CSS **************************** */
