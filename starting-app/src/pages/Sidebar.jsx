@@ -7,11 +7,11 @@ export const Sidebar = () => {
     return(
         <div className="sidebari">
 
-            <button className="active"><BiHome />Home</button>
+            <button> <Link to='/app' className="buttoni"> < BiHome />Home </Link> </button>
             <button> <Link to='/products' className="buttoni"> < BiClipboard />Products </Link> </button>
-            <button><MdPayment />Payment</button>
-            <button><BiBox />Orders</button>
-            <button><FiSettings />Settings</button>
+            <button> <Link to='/payment' className="buttoni"> < MdPayment />Payment </Link> </button>
+            <button> <Link to='/order' className="buttoni"> < BiBox />Orders </Link> </button>
+            <button> <Link to='/setting' className="buttoni"> < FiSettings />Settings </Link> </button>
         </div>
     )
 }

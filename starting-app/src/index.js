@@ -4,6 +4,9 @@ import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import Products from './Products';
+import Payment from './Payment'
+import Order from './Order';
+import Settings from './Settings';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,7 +15,9 @@ root.render(
       <Route path='/' element={ <Login /> } />
       <Route path='/app' element={ <App /> } />
       <Route path='/products' element={ < Products /> } />
-    
+      <Route path='/payment' element={ < Payment /> } />
+      <Route path='/order' element={ < Order /> } />
+      <Route path='/setting' element={ < Settings /> } />
     </Routes>
   </BrowserRouter>
 );
