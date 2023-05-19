@@ -99,8 +99,8 @@ header .name {
 /****************************** Home CSS **************************** */
 .body{
   display: flex;
-  width: 60vw;
-  max-width: 60vw;
+  width: 65vw;
+  max-width: 70vw;
 }
 .mainbody{
   display: flex;
@@ -169,7 +169,7 @@ header .name {
   font-weight: 600;
   font-size: 20px;
   line-height: 38px;
-  width: 28vw;
+  width: 25vw;
   padding: 2vh 0 4vh 0.5vw;
   margin-left: 1vw;
   border-bottom: 1px groove #999999;
@@ -198,6 +198,68 @@ header .name {
   color: #000000;
 }
 
+.orderproduct{
+  padding: 1vh 0 0 1vw ;
+}
+
+.orderproduct .borders{
+  display: flex;
+  justify-content: space-between;
+  background: #EAF0F0;
+  padding: 2vh;
+  border-radius: 15px;
+  border: 1px solid #c9c9c9;
+  margin-bottom: 20px;
+  
+  font-family: 'Quicksand';
+}
+.borders .rightside{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shuma{
+  border: 2px #999999 dashed;
+  border-radius: 12px;
+}
+
+.shuma .first{
+  display: flex;
+  justify-content: space-between;
+  padding: 2vh;
+  
+  font-size: 10px;
+  font-family: 'Quicksand';
+}
+.shuma .second {
+  display: flex;
+  justify-content: space-between;
+  padding: 2vh;
+  border-top: 2px #999999 dotted;
+  font-size: 10px;
+  font-family: 'Quicksand';
+}
+.shuma .buttons{
+  display: flex;
+  justify-content: center;
+  gap: 3vh;
+  padding: 3vh;
+}
+.buttons .cancel{
+  padding: 20px 15px;
+  border-radius: 8px;
+  background: #EC5A5A;
+  font-family: 'Quicksand';
+  text-transform: uppercase;
+}
+.buttons .send{
+  padding: 20px 15px;
+  border-radius: 8px;
+  background: #B1CED4;
+  font-family: 'Quicksand';
+  text-transform: uppercase;
+}
 
 /****************************** Products CSS **************************** */
 
