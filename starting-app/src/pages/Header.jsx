@@ -1,8 +1,13 @@
 import { FiSearch } from "react-icons/fi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { BiLogIn } from "react-icons/bi";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 export const Header = () => {
+  const [loginStatus, setLoginStatus] = useState("");
+
     return(
         <header className="Header">
           <div className="firstdiv">
@@ -12,9 +17,9 @@ export const Header = () => {
           </div>
           <div>
             <div className="useri">
-                <h3>Shitesi 1</h3>
+                <h3>{loginStatus}</h3>
                 <button><RiAccountCircleFill className="i"/></button>
-                <button><BiLogIn className="i"/></button>
+                <button><Link to="/"><BiLogIn className="i"/></Link></button>
             </div>
            </div>
         </header>

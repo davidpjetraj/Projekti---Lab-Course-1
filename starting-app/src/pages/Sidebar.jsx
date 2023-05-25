@@ -10,7 +10,7 @@ export const Sidebar = () => {
 
         <div className="sidebari">
             <ul >
-                <CustomLink to='/app' ><li className="buttoni">< BiHome className="icona" />Home</li></CustomLink>
+                <CustomLink to='/home' ><li className="buttoni">< BiHome className="icona" />Home</li></CustomLink>
                 <CustomLink to='/products' ><li className="buttoni">< BiClipboard className="icona" />Products</li></CustomLink>
                 <CustomLink to='/payment' ><li className="buttoni">< MdPayment className="icona" />Payment</li></CustomLink>
                 <CustomLink to='/order' ><li className="buttoni">< BiBox className="icona" />Orders</li></CustomLink>

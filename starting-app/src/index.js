@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import Home from './Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
+import Register from './Register';
 import Products from './Products';
 import Payment from './Payment'
 import Order from './Order';
@@ -13,11 +14,12 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={ <Login /> } />
-      <Route path='/app' element={ <App /> } />
+      <Route path='/register' element={ <Register /> } />
+      <Route path='/home' element={ <Home /> } />
       <Route path='/products' element={ < Products /> } />
       <Route path='/payment' element={ < Payment /> } />
       <Route path='/order' element={ < Order /> } />
-      <Route path='/setting' element={ < Settings /> } />
+      <Route path='/settings' element={ < Settings /> } />
     </Routes>
   </BrowserRouter>
 );

@@ -7,7 +7,7 @@ import {Order} from './pages/Order';
 import { Routes , Route } from 'react-router-dom';
 import Products from './Products';
 
-function App() {
+function HomePage() {
   return (
     <>
     <div className="App">
@@ -34,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomePage;

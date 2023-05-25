@@ -1,7 +1,7 @@
 import {Login} from './pages/Login';
 import './Login.css'
 import { Route, Routes } from 'react-router-dom';
-import App from './App';
+import Home from './Home';
 
 function Log() {
     return(
@@ -10,9 +10,9 @@ function Log() {
         </div> 
         
         <Routes>
-            <Route path='/app' element={< App />} />
+            <Route path='/home' element={< Home />} />
         </Routes></>
     );
 }
 
-export default Login;
+export default Log;
