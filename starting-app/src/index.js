@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import Products from './Products';
+import AddProducts  from './AddProducts';
 import Payment from './Payment'
 import Order from './Order';
 import Settings from './Settings';
@@ -17,6 +18,7 @@ root.render(
       <Route path='/register' element={ <Register /> } />
       <Route path='/home' element={ <Home /> } />
       <Route path='/products' element={ < Products /> } />
+      <Route path='/products/add-products' element={ < AddProducts /> } />
       <Route path='/payment' element={ < Payment /> } />
       <Route path='/order' element={ < Order /> } />
       <Route path='/settings' element={ < Settings /> } />

@@ -15,10 +15,6 @@ export const Login = () => {
 
     const navigate = useNavigate();
 
-    // const handleLogin = () => {
-    //   navigate.push('/home');
-    // };
-
     const login = () => {
     Axios.post("http://localhost:3001/login", {
        username: username,

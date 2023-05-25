@@ -1,5 +1,6 @@
 import { BiPlus } from "react-icons/bi"
 import React from "react"
+import { Link } from "react-router-dom"
 
 export const Produktet = () => {
     return(
@@ -7,7 +8,7 @@ export const Produktet = () => {
         <div>
             <div className="searchi">
                 <input type="search" placeholder="Kerko Produktin ... " />
-                <button> < BiPlus/> Shto Produkt</button>
+                <Link to="/products/add-products"> < BiPlus/> Shto Produkt</Link>
 
             </div>
             

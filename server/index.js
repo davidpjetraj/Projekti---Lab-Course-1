@@ -49,10 +49,34 @@ const db = mysql.createConnection({
         
                 if (result.length > 0) {
                     res.send( result);
-                    }else({message: "Wrong username/password comination!"});
+                    }else(
+                        {
+                            message: "Wrong username/password comination!"
+                        });
                 }            
         );
    });
+
+   app.post('/products/add-products', (req, res)=> {
+    const barkodi = req.body.barkodi;
+    const emriProduktit = req.body.emriProduktit;
+    const llojiProduktit = req.body.llojiProduktit;
+    const sasia = req.body.sasia;
+    const cmimiBlerjes = req.body.cmimiBlerjes;
+    const cmimiShitjes = req.body.cmimiShitjes;
+    const tvsh = req.body.tvsh;
+    const shuma = req.body.shuma;
+
+
+    db.query(
+    'INSERT INTO products (barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, tvsh, shuma) VALUES (?,?,?,?,?,?,?,?)',
+    [barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, tvsh, shuma],
+    (err, result)=> {
+    console.log(err);
+    }
+);
+});
+
 
    app.listen(3001, () => {
     console.log('running server');
