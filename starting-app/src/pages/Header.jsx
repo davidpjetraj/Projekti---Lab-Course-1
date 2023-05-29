@@ -1,12 +1,26 @@
 import { FiSearch } from "react-icons/fi";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { BiLogIn } from "react-icons/bi";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 export const Header = () => {
-  const [loginStatus, setLoginStatus] = useState("");
+  const [name, setName] =useState('')
+  const  navigate = useNavigate()
+  
+useEffect(()=> {
+  axios.get('http://localhost:3001')
+  .then( res =>  {
+    if (res.data.valid) {
+      setName(res.data.name);
+    }else {
+      navigate('/')
+    }
+  })
+  .catch(err => console.log(err))
+}, [])
 
     return(
         <header className="Header">
@@ -17,9 +31,9 @@ export const Header = () => {
           </div>
           <div>
             <div className="useri">
-                <h3>{loginStatus}</h3>
+                <h3>{name}</h3>
                 <button><RiAccountCircleFill className="i"/></button>
-                <button><Link to="/"><BiLogIn className="i"/></Link></button>
+                <button><Link to="/login"><BiLogIn className="i"/></Link></button>
             </div>
            </div>
         </header>

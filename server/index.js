@@ -1,17 +1,40 @@
-const express = require('express');
-const mysql = require("mysql2");
-const cors = require("cors");
+// const express = require('express');
+// const mysql = require("mysql2");
+// const cors = require("cors");
+
+import express from 'express'
+import mysql  from  'mysql'
+import cors from 'cors'
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
 const app = express();
-
-app.use(express.json());
-app.use(
-    cors({
+app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
-    credentials: true,
-    })
-);
+    credentials: true
+}));
+app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}))
+// app.use(
+//     cors({
+//     origin: ["http://localhost:3000"],
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//     })
+// );
 
 const db = mysql.createConnection({
     user: 'root',
@@ -20,42 +43,60 @@ const db = mysql.createConnection({
     database: 'possystem',
  });
 
-    app.post('/register', (req, res)=> {
-        const username = req.body.username;
-        const email = req.body.email;
-        const password = req.body.password;
+ app.get('/', (req, res) => {
+    if(req.session.name) {
+        return res.json({valid: true, name: req.session.name})
+    } else {
+        returnres.json({valid: false})
+    }
+ })
+    app.post('/register',async (req, res)=> {
+        const sql = "INSERT INTO users ('name', 'email', 'password') VALUES (?)";
+        const values = [
+            req.body.name,
+            req.body.email,
+            req.body.password
+        ]
+        db.query(sql, [values], (err, result) => {
+            if(err) return res.json({Message: "Error in Node"});
+            return res.json(result);
+        })
+     });
 
-        db.query(
-        'INSERT INTO users (username, email, password) VALUES (?,?,?)',
-        [username, email, password],
-        (err, result)=> {
-        console.log(err);
-        }
-    );
- });
+    app.post("/login", (req, res) => {
+        const sql = "SELECT * FROM users WHERE name = ? and password = ?";
+        db.query(sql, [req.body.name, req.body.password], (err, result) => {
+            if(err) return res.json({Message: "Error inside server"});
+            if (result.length > 0) {
+                req.session.name = result[0].name;
+                return res.json({Login: true, name: req.session.name})
+            } else {
+                return  res.json({Login: false})
+            }
+        })
+    })
 
-
-   app.post('/login', (req, res) => {
-        const username = req.body.username;
-        const password = req.body.password;
+//    app.post('/login', (req, res) => {
+//         const username = req.body.username;
+//         const password = req.body.password;
     
-        db.query(
-            "SELECT * FROM users WHERE username = ? AND password = ?",
-            [username, password],
-            (err, result)=> {
-                if (err) {
-                    res.send({err: err});
-                }
+//         db.query(
+//             "SELECT * FROM users WHERE username = ? AND password = ?",
+//             [username, password],
+//             (err, result)=> {
+//                 if (err) {
+//                     res.send({err: err});
+//                 }
         
-                if (result.length > 0) {
-                    res.send( result);
-                    }else(
-                        {
-                            message: "Wrong username/password comination!"
-                        });
-                }            
-        );
-   });
+//                 if (result.length > 0) {
+//                     res.send( result);
+//                     }else(
+//                         {
+//                             message: "Wrong username/password comination!"
+//                         });
+//                 }            
+//         );
+//    });
 
    app.post('/products/add-products', (req, res)=> {
     const barkodi = req.body.barkodi;
