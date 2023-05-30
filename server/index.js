@@ -17,6 +17,8 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(session({
@@ -28,13 +30,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }))
-// app.use(
-//     cors({
-//     origin: ["http://localhost:3000"],
-//     methods: ["GET", "POST"],
-//     credentials: true,
-//     })
-// );
+
 
 const db = mysql.createConnection({
     user: 'root',
@@ -43,25 +39,49 @@ const db = mysql.createConnection({
     database: 'possystem',
  });
 
+ db.connect((error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Mysql connected...");
+    }
+  });
+
  app.get('/', (req, res) => {
     if(req.session.name) {
         return res.json({valid: true, name: req.session.name})
     } else {
-        returnres.json({valid: false})
+        return res.json({valid: false})
     }
  })
-    app.post('/register',async (req, res)=> {
-        const sql = "INSERT INTO users ('name', 'email', 'password') VALUES (?)";
-        const values = [
-            req.body.name,
-            req.body.email,
-            req.body.password
-        ]
-        db.query(sql, [values], (err, result) => {
+    // app.post('/register',async (req, res)=> {
+    //     const sql = "INSERT INTO users ('name', 'email', 'password') VALUES (?)";
+    //     const values = [
+    //         req.body.name,
+    //         req.body.email,
+    //         req.body.password
+    //     ]
+    //     db.query(sql, [values], (err, result) => {
+    //         if(err) return res.json({Message: "Error in Node"});
+    //         return res.json(result);
+    //     })
+    //  });
+
+     app.post('/register',async (req, res)=> {
+        const { name, email, password } = req.body;
+        try{
+    
+        } catch (error){}
+        console.log(name, email, password)
+        db.query(
+        'INSERT INTO users (name, email, password) VALUES (?,?,?)',
+        [name, email, password],
+        (err, result)=> {
             if(err) return res.json({Message: "Error in Node"});
-            return res.json(result);
-        })
-     });
+            return res.json(result);        
+        }
+    );
+    });
 
     app.post("/login", (req, res) => {
         const sql = "SELECT * FROM users WHERE name = ? and password = ?";
@@ -76,27 +96,7 @@ const db = mysql.createConnection({
         })
     })
 
-//    app.post('/login', (req, res) => {
-//         const username = req.body.username;
-//         const password = req.body.password;
-    
-//         db.query(
-//             "SELECT * FROM users WHERE username = ? AND password = ?",
-//             [username, password],
-//             (err, result)=> {
-//                 if (err) {
-//                     res.send({err: err});
-//                 }
-        
-//                 if (result.length > 0) {
-//                     res.send( result);
-//                     }else(
-//                         {
-//                             message: "Wrong username/password comination!"
-//                         });
-//                 }            
-//         );
-//    });
+
 
    app.post('/products/add-products', (req, res)=> {
     const barkodi = req.body.barkodi;
@@ -108,12 +108,12 @@ const db = mysql.createConnection({
     const tvsh = req.body.tvsh;
     const shuma = req.body.shuma;
 
-
     db.query(
     'INSERT INTO products (barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, tvsh, shuma) VALUES (?,?,?,?,?,?,?,?)',
     [barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, tvsh, shuma],
     (err, result)=> {
-    console.log(err);
+        if(err) return res.json({Message: "Error in Node"});
+        return res.json(result);        
     }
 );
 });

@@ -6,39 +6,23 @@ import '../Register.css'
 import axios from "axios";
 
 export const Register = () => {
-  // const [usernameReg, setUernameReg] = useState("");
-  //   const [emailReg, setEmailReg] = useState ("");
-  //   const [passwordReg, setPasswordReg] = useState ("");
-  
-  //   const register = () => {
-  //     Axios.post("http://localhost:3001/register", {
-  //       username: usernameReg,
-  //       email: emailReg,
-  //       password: passwordReg,
-  //      }).then((response) => {
-  //         console.log(response);
-  //      });
-  //    };
-// function Register() {
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    password: ''
-  })
+
+  const [usernameReg, setUsernameReg] = useState("");
+  const [emailReg, setEmailReg] = useState ("");
+  const [passwordReg, setPasswordReg] = useState ("");
 
     const navigate =  useNavigate();
-
-    const handleInput = (event) => {
-      setValues(prev =>  ({...prev, [event.target.name]: [event.target.value]}))
-    }
   
     const handleSubmit = async (event) => {
       event.preventDefault();
-      axios.post('http://localhost:3001/register',  values)
-      .then(res => 
+      axios.post('http://localhost:3001/register',  {
+        name: usernameReg,
+        email: emailReg,
+        password: passwordReg
+    }).then(res => 
         {
           console.log(res);
-          navigate('/')
+          navigate('/login')
         })
       .catch(err => console.log(err));
     }
@@ -49,13 +33,19 @@ export const Register = () => {
         <form onSubmit={handleSubmit} className="registerform">
           <h2>Register Page</h2>
           <div className="icona"><RiAccountCircleFill/></div>
-            <input type="text" name="name" placeholder="Username ..." onChange={handleInput} />
-            <input type="email" name="email" placeholder="Email ..." onChange={handleInput}/>
-            <input type="password" name="password" placeholder="Password ..." onChange={handleInput}/>
+            <input type="text" name="name" placeholder="Username ..."onChange={(e) => {
+              setUsernameReg(e.target.value);
+           }} />
+            <input type="email" name="email" placeholder="Email ..." onChange={(e) => {
+              setEmailReg(e.target.value);
+           }}/>
+            <input type="password" name="password" placeholder="Password ..."  onChange={(e) =>{
+              setPasswordReg(e.target.value);
+           }}/>
             <button type="submit">Register
                 {/* <Link to='/home' className="registerbutton"> Register </Link> */}
             </button>
-            <p><Link to='/login'>Login</Link></p>
+            <p><Link to='/'>Login</Link></p>
         </form>
         </>
         </div>
