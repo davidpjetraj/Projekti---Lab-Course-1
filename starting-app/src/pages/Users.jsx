@@ -21,16 +21,18 @@ export const User = () => {
         try{
             await axios.delete("http://localhost:3001/users/"+id)
             window.location.reload()
+            
         } catch(err){
             console.log(err)
         }
     }
 
     return(
-        <div>
+        <div className="tabelaa">
             <h1>Users</h1>
-            <div className="users">
-                    
+            <div>
+                <button><Link to="/add-users">Add new user</Link></button>
+                    <form onSubmit={handleDelete}>
                 {users.map(user=>(
                     <div className="user" key={user.id}>
                         <tr>
@@ -46,13 +48,13 @@ export const User = () => {
                             <td>{user.password}</td>
                         </tr>
                         <tr>
-                            <td><button onClick={()=>handleDelete(user.id)}>Delete</button></td>
+                            <td><button type="submit">Delete</button></td>
                             <td><button><Link to={'/updateUsers/${user.id}'}>Update</Link></button></td>
                         </tr>
                     </div>
                 ))}
+                </form>
             </div>
-            <button><Link to="/add-users">Add new user</Link></button>
         </div>
     )
 }

@@ -63,65 +63,51 @@ const db = mysql.createConnection({
         })
     });
     
-    app.post("/users", (req,res)=>{
-        const q = "INSERT INTO users ('name', 'email', 'password') VALUES (?)";
-        const values = [  
-            req.body.name,
-            req.body.email,
-            req.body.password
-            ]
-        db.query(q, [values], (err, data) => {
-            if (err) return res.json(err);
-            return res.json("Users has been created sucessfully");
-        });
+    app.post('/users',async (req, res)=> {
+        const { name, email, password } = req.body;
+        try{
+    
+        } catch (error){}
+        console.log(name, email, password)
+        db.query(
+        'INSERT INTO users (name, email, password) VALUES (?,?,?)',
+        [name, email, password],
+        (err, result)=> {
+            if(err) return res.json({Message: "Error in Node"});
+            return res.json(result);        
+        }
+    );
     });
 
-    app.post('/users/:id', (req, res) => {
-        const { id } = req.params;
-      
-        const sql = 'DELETE FROM users WHERE id = ?';
-        const values = [id];
-      
-        db.query(sql, values, (err, result) => {
-          if (err) {
-            console.error('Error deleting user:', err);
-            res.send({ status: 'error' });
-          } else {
-            if (result.affectedRows > 0) {
-              res.send({ status: 'ok' });
-            } else {
-              res.send({ status: 'not_found' });
-            }
-          }
-        });
-      });
-
-    // app.delete("/users/:id", (req,res)=>{
-    //     const userId = req.params.id;
-    //     const q = "DELETE FROM users WHERE id = ?";
-
-    //     db.query(q,[userId], (err,data)=>{
-    //         if (err) return res.json(err);
-    //         return res.json("Users has been deleted sucessfully.");
-    //     })
-    // })
-
-    app.put("/users/:id", (req,res)=>{
+    app.delete("/users/:id", (req,res)=>{
         const userId = req.params.id;
-        const q = "UPDATE users SET 'name' = ?, 'email' = ?, 'password' = ? WHERE  id = ?";
+        const q = "DELETE FROM users WHERE id = ?";
 
-        const values = [  
-            req.body.name,
-            req.body.email,
-            req.body.password
-            ]
-
-        db.query(q,[...values,userId], (err,data)=>{
+        db.query(q,[userId], (err,data)=>{
             if (err) return res.json(err);
-            return res.json("Users has been updated sucessfully.");
+            return res.json("Users has been deleted sucessfully.");
         })
     })
-   
+
+    // Update a user
+app.put('/users/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, email, password } = req.body;
+    const updateQuery = `UPDATE users SET name = '${name}', email = '${email}', password = '${password}' WHERE id = '${id}'`;
+  
+    db.query(updateQuery, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Error updating user');
+      } else if (result.affectedRows === 0) {
+        res.status(404).send('User not found');
+      } else {
+        res.status(200).send('User updated successfully');
+      }
+    });
+  });
+
+  
         // Get all products
         app.get('/products', (req, res) => {
             const q = "SELECT * FROM products"
@@ -130,26 +116,25 @@ const db = mysql.createConnection({
                 return  res.json(data)
             })
         });
-        
+
         app.post("/products", (req,res)=>{
-            const q = "INSERT INTO products ('barkodi', 'emriProduktit', 'llojiProduktit', 'sasia', 'cmimiBlerjes', 'cmimiShitjes', 'shuma') VALUES (?)";
-            const values = [  
-                req.body.barkodi,
-                req.body.emriProduktit,
-                req.body.llojiProduktit,
-                req.body.sasia,
-                req.body.cmimiBlerjes,
-                req.body.cmimiShitjes,
-                req.body.shuma
-                ]
-            db.query(q, [values], (err, data) => {
-                if (err) return res.json(err);
-                return res.json("Products has been created sucessfully");
-            });
-        });
+            const { barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, shuma } = req.body;
+            try{
+        
+            } catch (error){}
+            console.log(barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, shuma)
+            db.query(
+                "INSERT INTO products ('barkodi', 'emriProduktit', 'llojiProduktit', 'sasia', 'cmimiBlerjes', 'cmimiShitjes', 'shuma') VALUES (?)",
+            [barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, shuma],
+            (err, result)=> {
+                if(err) return res.json({Message: "Product created successfully"});
+                return res.json(result);        
+            }
+        );
+    });
     
         app.delete("/products/:id", (req,res)=>{
-            const userId = req.params.id;
+            const productId = req.params.id;
             const q = "DELETE FROM products WHERE id = ?";
     
             db.query(q,[productId], (err,data)=>{
@@ -210,24 +195,24 @@ const db = mysql.createConnection({
                 return res.json("Payments has been deleted sucessfully.");
             })
         })
-    
-        app.put("/fatura/:id", (req,res)=>{
-            const paymentId = req.params.id;
-            const q = "UPDATE payments SET 'nrFatures' = ?, 'shuma' = ?, 'dataFatures' = ?";
-    
-            const values = [  
-                req.body.nrFatures,
-                req.body.shuma,
-                req.body.dataFatures
-                ]
-    
-            db.query(q,[...values,paymentId], (err,data)=>{
-                if (err) return res.json(err);
-                return res.json("Payments has been updated sucessfully.");
-            })
-        })
-
-
+    // Update a payment
+app.put('/fatura/:id', (req, res) => {
+    const { id } = req.params;
+    const { nrFatures, shuma, data } = req.body;
+    const updateQuery = `UPDATE payments SET nrFatures = ${nrFatures}, shuma = ${shuma}, data = '${data}' WHERE id = ${id}`;
+  
+    db.query(updateQuery, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Error updating payment');
+      } else if (result.affectedRows === 0) {
+        res.status(404).send('Payment not found');
+      } else {
+        res.status(200).send('Payment updated successfully');
+      }
+    });
+  });
+  
     // Get a user by ID
     // app.get('/users/:id', (req, res) => {
     //     const userId = req.params.id;

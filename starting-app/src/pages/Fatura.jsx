@@ -1,49 +1,45 @@
-import React from "react";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Fatura = () =>{
+        const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        const fetchAllProducts = async ()=>{
+            try{
+                const res = await axios.get("http://localhost:3001/products")
+                setProducts(res.data)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fetchAllProducts()
+    }, [])
+
     return(
         <div className="orderbody">
             <div className="ordername">
-                <h1>FATURA #</h1>
+                <h1>FARURA #</h1>
             </div>
             {/* <div className="ordercart">
                 <MdOutlineShoppingCart className="carticon"/>
                 <h1>NO PRODUCTS IN THIS MOMENT ADDED</h1>
             </div> */}
             <div className="orderproduct">
-                <ul>
+            {products.map(product=>(
+                <ul key={product.id}>
                     <div className="borders">
                         <div className="leftside">
-                        <p>Lemon Soda</p>
-                        <h1>$1</h1>
-                        </div>
-                        <div className="rightside">
-                        <p>Sasia</p>
-                        <h1>2</h1>
-                        </div>
-                    </div>
-                    <div className="borders">
-                        <div className="leftside">
-                        <p>Lemon Soda</p>
-                        <h1>$1</h1>
-                        </div>
-                        <div className="rightside">
-                        <p>Sasia</p>
-                        <h1>2</h1>
-                        </div>
-                    </div>
-                    <div className="borders">
-                        <div className="leftside">
-                        <p>Lemon Soda</p>
-                        <h1>$1</h1>
-                        </div>
-                        <div className="rightside">
-                        <p>Sasia</p>
-                        <h1>2</h1>
+                            <p>{product.emriProduktit}</p>
+                            <h1>{product.cmimiShitjes}€</h1>
+                            </div>
+                            <div className="rightside">
+                            <p>Sasia</p>
+                            <h1>{product.sasia}</h1>
                         </div>
                     </div>
                 </ul>
+                ))}
 
                 <div className="shuma">
                     <div className="first">

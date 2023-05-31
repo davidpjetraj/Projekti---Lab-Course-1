@@ -12,6 +12,8 @@ import Payment from './Payment'
 import Fatura from './Fatura';
 import Settings from './Settings';
 import AddUsers from './pages/AddUsers';
+import UpdateProducts from './pages/UpdateProducts';
+import UpdateFatura from './pages/UpdateFatura';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,8 +27,10 @@ root.render(
       <Route path='/updateUsers/:id' element={ <UpdateUsers /> } />
       <Route path='/products' element={ < Products /> } />
       <Route path='/products/add-products' element={ < AddProducts /> } />
+      <Route path='/updateProducts/:id' element={ <UpdateProducts /> } />
       <Route path='/payments' element={ < Payment /> } />
       <Route path='/fatura' element={ < Fatura /> } />
+      <Route path='/updateFatura/:id' element={ <UpdateFatura /> } />
       <Route path='/settings' element={ < Settings /> } />
     </Routes>
   </BrowserRouter>

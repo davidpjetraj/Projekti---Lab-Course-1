@@ -38,7 +38,7 @@ export const Pagesa = () => {
                     <th>Numri Fatures</th>
                     <th>Shuma Fatures</th>
                     <th>Data e Shitjes</th>
-                    <th>Emri Shitesit</th>
+                    {/* <th>Emri Shitesit</th> */}
                     <th><button><Link to="/">Shto Fatur te Re</Link></button></th>
 
                 </tr>
