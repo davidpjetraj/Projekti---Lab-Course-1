@@ -3,7 +3,7 @@ import {Home} from './pages/Home';
 import {Header} from './pages/Header';
 import {Sidebar} from './pages/Sidebar';
 import Datetime from './pages/Datetime';
-import {Order} from './pages/Order';
+import {Fatura} from './pages/Fatura';
 import { Routes , Route } from 'react-router-dom';
 import Products from './Products';
 
@@ -19,7 +19,7 @@ function HomePage() {
                   < Datetime />
                   < Home />
                 </div>
-                  <Order/>
+                  <Fatura />
         </div>
       </div>
     </div>

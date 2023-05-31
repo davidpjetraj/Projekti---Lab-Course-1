@@ -1,88 +1,70 @@
-import React from "react"
-import { useState } from "react"
-import Axios from "axios"
+import React, { useState } from "react";
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 export const AddProduktet = () => {
-    const [barkodiReg, setBarkodi] = useState("");
-    const [emriProduktitReg, setEmriProduktit] = useState ("");
-    const [llojiProduktitReg, setLlojiProduktit] = useState ("");
-    const [sasiaReg, setSasia] = useState ("");
-    const [cmimiBlerjesReg, setCmimiBlerjes] = useState ("");
-    const [cmimiShitjesReg, setCmimiShitjes] = useState ("");
-    const [tvshReg, setTvsh] = useState ("");
-    const [shumaReg, setShuma] = useState ("");
-  
-    const addProducts = () => {
-      Axios.post("http://localhost:3001/products/add-products", {
-        barkodi: barkodiReg,
-        emriProduktit: emriProduktitReg,
-        llojiProduktit: llojiProduktitReg,
-        sasia: sasiaReg,
-        cmimiBlerjes: cmimiBlerjesReg,
-        cmimiShitjes: cmimiShitjesReg,
-        tvsh: tvshReg,
-        shuma: shumaReg,
-       }).then((response) => {
-          console.log(response);
-       });
-     };
+    const [product, setProduct] = useState({
+        barkodi: "",
+        emriProduktit: "",
+        llojiProduktit: "",
+        sasia: "",
+        cmimiBlerjes: "",
+        cmimiShitjes: "",
+        shuma: "",
+    });
+
+    const navigate = useNavigate()
+
+
+
+    const handleChange = (e) => {
+        setProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handleClick = async e =>{
+        e.preventDefault()
+        try{
+            await axios.post("http://localhost:3001/products", product)
+            navigate("/products")
+        }catch(err){
+            console.log(err)
+        }
+
+    }
 
     return(
 
-        <div>            
+        <div>
             <div className="tabelaa">
             <table>
             <thead>
                 <tr>
                     <th>Barkodi</th>
                     <th>Emri Produktit</th>
+                    <th>Lloji Produktit</th>
                     <th>Sasia</th>
                     <th>Qmimi i Blerjes</th>
                     <th>Shuma</th>
-                    <th>TVSH</th>
-                    <th>RABATI</th>
                     <th>Qmimi i Shitjes</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="number" onChange={(e) => { 
-                        setBarkodi(e.target.value);}} /></td>
-                    <td><input type="text" onChange={(e) => { 
-                        setEmriProduktit(e.target.value);}} /></td>                    
-                    <td><input type="text" onChange={(e) => { 
-                        setLlojiProduktit(e.target.value);}} /></td>      
-                    <td><input type="number" onChange={(e) => { 
-                        setSasia(e.target.value);}} /></td>      
-                    <td><input type="number" onChange={(e) => { 
-                        setCmimiBlerjes(e.target.value);}} /></td>      
-                    <td><input type="number" onChange={(e) => { 
-                        setCmimiShitjes(e.target.value);}} /></td>      
-                    <td><input type="number" onChange={(e) => { 
-                        setTvsh(e.target.value);}} /></td>      
-                    <td><input type="number" onChange={(e) => { 
-                        setShuma(e.target.value);}} /></td>      
-                    <button onClick={addProducts}> Add </button>  
-                </tr>
-                <tr>
-                    <td> 12121212</td>
-                    <td> Lemon Soda</td>
-                    <td> 502</td>
-                    <td>$69.69</td>
-                    <td>$6969.69</td>
-                    <td>$3508.98</td>
-                    <td>$3500.22</td>
-                    <td>$5555</td>
-                </tr>
-                <tr>
-                    <td> 12121212</td>
-                    <td> Lemon Soda</td>
-                    <td> 502</td>
-                    <td>$69.69</td>
-                    <td>$6969.69</td>
-                    <td>$3508.98</td>
-                    <td>$3500.22</td>
-                    <td>$5555</td>
+                <tr>    
+                    <td><input type="number" placeholder="Barkodi..." 
+                    onChange={handleChange} name="barkodi"/></td>
+                    <td><input type="text" placeholder="Emri Produktit..." 
+                    onChange={handleChange} name="emriProduktit"/></td>
+                    <td><input type="text" placeholder="Lloji Produktit..." 
+                    onChange={handleChange} name="llojiProduktit"/></td> 
+                    <td><input type="number" placeholder="Sasia..." 
+                    onChange={handleChange} name="sasia"/></td>
+                    <td><input type="number" placeholder="Qmimi i Blerjes..." 
+                    onChange={handleChange} name="cmimiBlerjes"/></td>   
+                    <td><input type="number" placeholder="Shuma..." 
+                    onChange={handleChange} name="shuma"/></td>  
+                    <td><input type="number" placeholder="Qmimi i Shitjes..." 
+                    onChange={handleChange} name="cmimiShitjes"/></td>               
+                    <td><button onClick={handleClick}>Add</button></td>
                 </tr>
             </tbody>
             </table>

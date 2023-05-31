@@ -1,14 +1,40 @@
 import { BiPlus } from "react-icons/bi"
-import React from "react"
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
+import axios from "axios";
+
 
 export const Produktet = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        const fetchAllProducts = async ()=>{
+            try{
+                const res = await axios.get("http://localhost:3001/products")
+                setProducts(res.data)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fetchAllProducts()
+    }, [])
+
+    const handleDelete = async (id)=>{
+        try{
+            await axios.delete("http://localhost:3001/products/add-products/"+id)
+            window.location.reload()
+        } catch(err){
+            console.log(err)
+        }
+    }
+
+
     return(
 
         <div>
             <div className="searchi">
                 <input type="search" placeholder="Kerko Produktin ... " />
-                <Link to="/products/add-products"> < BiPlus/> Shto Produkt</Link>
+                <button><Link to="/products/add-products"> < BiPlus/> Shto Produkt</Link></button>
 
             </div>
             
@@ -18,45 +44,27 @@ export const Produktet = () => {
                 <tr>
                     <th>Barkodi</th>
                     <th>Emri Produktit</th>
+                    <th>Lloji Produktit</th>
                     <th>Sasia</th>
                     <th>Qmimi i Blerjes</th>
                     <th>Shuma</th>
-                    <th>TVSH</th>
-                    <th>RABATI</th>
                     <th>Qmimi i Shitjes</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td> 12121212</td>
-                    <td> Lemon Soda</td>
-                    <td> 502</td>
-                    <td>$69.69</td>
-                    <td>$6969.69</td>
-                    <td>$3508.98</td>
-                    <td>$3500.22</td>
-                    <td>$5555</td>
+            {products.map(product=>(
+                <tr key={product.id}>
+                    <td>{product.barkodi}</td>
+                    <td>{product.emriProduktit}</td>
+                    <td>{product.llojiProduktit}</td>
+                    <td>{product.sasia}</td>
+                    <td>{product.cmimiBlerjes}€</td>
+                    <td>{product.shuma}€</td>
+                    <td>{product.cmimiShitjes}€</td>
+                    <td><button onClick={()=>handleDelete(product.id)}>Delete</button></td>
+                    <td><button><Link to={'/updateProducts/${product.id}'}>Update</Link></button></td>
                 </tr>
-                <tr>
-                    <td> 12121212</td>
-                    <td> Lemon Soda</td>
-                    <td> 502</td>
-                    <td>$69.69</td>
-                    <td>$6969.69</td>
-                    <td>$3508.98</td>
-                    <td>$3500.22</td>
-                    <td>$5555</td>
-                </tr>
-                <tr>
-                    <td> 12121212</td>
-                    <td> Lemon Soda</td>
-                    <td> 502</td>
-                    <td>$69.69</td>
-                    <td>$6969.69</td>
-                    <td>$3508.98</td>
-                    <td>$3500.22</td>
-                    <td>$5555</td>
-                </tr>
+            ))}      
             </tbody>
             </table>
             </div>

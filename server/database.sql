@@ -14,9 +14,17 @@ CREATE TABLE products (
     barkodi VARCHAR(100) NOT NULL,
     emriProduktit VARCHAR(50) NOT NULL,
     llojiProduktit VARCHAR(100) NOT NULL,
-    sasia INT,
-    cmimiBlerjes INT,
-    cmimiShitjes INT,
-    tvsh INT,
-    shuma INT
+    sasia INT NOT NULL,
+    cmimiBlerjes INT NOT NULL,
+    cmimiShitjes INT NOT NULL,
+    shuma INT NOT NULL
 );
+ALTER TABLE `products` ADD UNIQUE(`barkodi`);
+
+CREATE TABLE payments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nrFatures INT NOT NULL,
+    shuma INT NOT NULL,
+    data DATE NOT NULL
+);
+ALTER TABLE `payments` ADD UNIQUE(`nrFatures`);

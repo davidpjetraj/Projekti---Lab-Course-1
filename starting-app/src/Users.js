@@ -1,26 +1,34 @@
 import './App.css';
-import {Porosia} from './pages/Porosia';
+import User from './pages/Users';
 import {Header} from './pages/Header';
 import {Sidebar} from './pages/Sidebar';
 import Datetime from './pages/Datetime';
+import { Routes , Route } from 'react-router-dom';
 
-
-function Order() {
-    return(
-        <div className="App">
-            < Header />
+function Useri() {
+  return (
+    <>
+    <div className="User">
+      < Header />
         <div className='Body'>
           < Sidebar />
            <div className='Body'>
                 <div>
                   < Datetime />
-                  < Porosia />
+                  < User />
                 </div>
-                  
         </div>
       </div>
     </div>
-    );
+
+
+    <Routes>
+      <Route path='/users' element={ < User /> } />
+    </Routes>
+
+
+    </>
+  );
 }
 
-export default Order;
+export default Useri;

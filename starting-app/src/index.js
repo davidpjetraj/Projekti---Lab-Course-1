@@ -4,11 +4,14 @@ import Home from './Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
+import Users from './Users';
+import UpdateUsers from './pages/UpdateUsers';
 import Products from './Products';
 import AddProducts  from './AddProducts';
 import Payment from './Payment'
-import Order from './Order';
+import Fatura from './Fatura';
 import Settings from './Settings';
+import AddUsers from './pages/AddUsers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,10 +20,13 @@ root.render(
       <Route path='/login' element={ <Login /> } />
       <Route path='/register' element={ <Register /> } />
       <Route path='/' element={ <Home /> } />
+      <Route path='/users' element={ <Users /> } />
+      <Route path='/add-users' element={ <AddUsers /> } />
+      <Route path='/updateUsers/:id' element={ <UpdateUsers /> } />
       <Route path='/products' element={ < Products /> } />
       <Route path='/products/add-products' element={ < AddProducts /> } />
-      <Route path='/payment' element={ < Payment /> } />
-      <Route path='/order' element={ < Order /> } />
+      <Route path='/payments' element={ < Payment /> } />
+      <Route path='/fatura' element={ < Fatura /> } />
       <Route path='/settings' element={ < Settings /> } />
     </Routes>
   </BrowserRouter>

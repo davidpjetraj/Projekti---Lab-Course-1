@@ -19,10 +19,9 @@ export const Register = () => {
         name: usernameReg,
         email: emailReg,
         password: passwordReg
-    }).then(res => 
-        {
-          console.log(res);
-          navigate('/login')
+    }).then(res => {
+      console.log('User has been created successfully!')
+      navigate('/login')
         })
       .catch(err => console.log(err));
     }
@@ -42,10 +41,8 @@ export const Register = () => {
             <input type="password" name="password" placeholder="Password ..."  onChange={(e) =>{
               setPasswordReg(e.target.value);
            }}/>
-            <button type="submit">Register
-                {/* <Link to='/home' className="registerbutton"> Register </Link> */}
-            </button>
-            <p><Link to='/'>Login</Link></p>
+            <button type="submit">Register</button>
+            <p><Link to='/login'>Login</Link></p>
         </form>
         </>
         </div>

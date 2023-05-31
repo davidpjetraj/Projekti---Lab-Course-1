@@ -1,6 +1,6 @@
-import { FiSearch } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 import { RiAccountCircleFill } from "react-icons/ri";
-import { BiLogIn } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -20,7 +20,7 @@ useEffect(()=> {
     }
   })
   .catch(err => console.log(err))
-}, [])
+})
 
     return(
         <header className="Header">
@@ -33,7 +33,7 @@ useEffect(()=> {
             <div className="useri">
                 <h3>{name}</h3>
                 <button><RiAccountCircleFill className="i"/></button>
-                <button><Link to="/login"><BiLogIn className="i"/></Link></button>
+                <button><Link to="/login"><BiLogOut className="i"/></Link></button>
             </div>
            </div>
         </header>

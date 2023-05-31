@@ -1,11 +1,11 @@
 import React from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
-export const Order = () =>{
+export const Fatura = () =>{
     return(
         <div className="orderbody">
             <div className="ordername">
-                <h1>ORDER #</h1>
+                <h1>FATURA #</h1>
             </div>
             {/* <div className="ordercart">
                 <MdOutlineShoppingCart className="carticon"/>

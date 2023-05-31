@@ -1,8 +1,22 @@
-import React from "react"
 import { BiDollar, BiMenu } from "react-icons/bi"
 import { MdOutlineAdsClick, MdPeopleOutline } from "react-icons/md"
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Home = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        const fetchAllProducts = async ()=>{
+            try{
+                const res = await axios.get("http://localhost:3001/products")
+                setProducts(res.data)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fetchAllProducts()
+    }, [])
     return(
         <div className="mainbody">
                 <div className="body">
@@ -33,19 +47,22 @@ export const Home = () => {
                 <tr>
                     <th>Barkodi</th>
                     <th>Emri Produktit</th>
+                    <th>Lloji Produktit</th>
                     <th>Sasia</th>
-                    <th>Qmimi</th>
-                    <th>Shuma</th>
+                    <th>Qmimi Shitjes</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td> 12121212</td>
-                    <td> Lemon Soda</td>
-                    <td> 502</td>
-                    <td>$69.69</td>
-                    <td>$6969.69</td>
+                {products.map(product=>(
+                <tr key={product.id}>
+                    <td>{product.barkodi}</td>
+                    <td>{product.emriProduktit}</td>
+                    <td>{product.llojiProduktit}</td>
+                    <td>{product.sasia}</td>
+                    <td>{product.cmimiShitjes}€</td>
+                    <td><button>Add</button></td>
                 </tr>
+            ))}
             </tbody>
             </table>
             </div>
