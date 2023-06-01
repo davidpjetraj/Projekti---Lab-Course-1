@@ -10,17 +10,28 @@ export const Header = () => {
   const [name, setName] =useState('')
   const  navigate = useNavigate()
   
-useEffect(()=> {
-  axios.get('http://localhost:3001')
-  .then( res =>  {
-    if (res.data.valid) {
-      setName(res.data.name);
-    }else {
-      navigate('/')
-    }
+  useEffect(()=> {
+    axios.get('http://localhost:3001')
+    .then( res =>  {
+      if (res.data.valid) {
+        setName(res.data.name);
+      }else {
+        navigate('/')
+      }
+    })
+    .catch(err => console.log(err))
   })
-  .catch(err => console.log(err))
-})
+
+  const handleLogout = () => {
+    axios.get('/logout')
+      .then(response => {
+        window.location.href = '/login';
+        navigate('/login')
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
     return(
         <header className="Header">
@@ -32,8 +43,10 @@ useEffect(()=> {
           <div>
             <div className="useri">
                 <h3>{name}</h3>
-                <button><RiAccountCircleFill className="i"/></button>
-                <button><Link to="/login"><BiLogOut className="i"/></Link></button>
+                <RiAccountCircleFill className="i"/>
+                <form onSubmit={handleLogout}>
+                  <button type="submit"><Link to="/login"><BiLogOut className="i"/></Link></button>
+                </form>
             </div>
            </div>
         </header>

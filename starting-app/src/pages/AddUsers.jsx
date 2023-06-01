@@ -26,7 +26,7 @@ const AddUser = () => {
         <div className="form">
             <form onSubmit={handleSubmit}>
                 <h1>Add New User</h1>
-                <input type="text" name="name" placeholder="Username ..."onChange={(e) => {
+                <input type="text" name="name" placeholder="Username ..." onChange={(e) => {
                 setUsernameReg(e.target.value);
                 }} />
                 <input type="email" name="email" placeholder="Email ..." onChange={(e) => {

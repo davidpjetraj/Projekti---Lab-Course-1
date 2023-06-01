@@ -54,6 +54,19 @@ const db = mysql.createConnection({
         return res.json({valid: false})
     }
  })
+
+    // Logout route
+    app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+        console.log(err);
+        } else {
+        res.clearCookie('session-id'); // Delete the session cookie
+        res.redirect('/login');
+        }
+    });
+    });
+
     // Get all users
     app.get('/users', (req, res) => {
         const q = "SELECT * FROM users"
@@ -73,11 +86,12 @@ const db = mysql.createConnection({
         'INSERT INTO users (name, email, password) VALUES (?,?,?)',
         [name, email, password],
         (err, result)=> {
-            if(err) return res.json({Message: "Error in Node"});
+            if(err) return res.json({Message: "User created successfully"});
             return res.json(result);        
         }
     );
     });
+
 
     app.delete("/users/:id", (req,res)=>{
         const userId = req.params.id;
@@ -90,22 +104,22 @@ const db = mysql.createConnection({
     })
 
     // Update a user
-app.put('/users/:id', (req, res) => {
-    const { id } = req.params;
-    const { name, email, password } = req.body;
-    const updateQuery = `UPDATE users SET name = '${name}', email = '${email}', password = '${password}' WHERE id = '${id}'`;
-  
-    db.query(updateQuery, (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send('Error updating user');
-      } else if (result.affectedRows === 0) {
-        res.status(404).send('User not found');
-      } else {
-        res.status(200).send('User updated successfully');
-      }
+    app.put('/users/:id', (req, res) => {
+        const { id } = req.params;
+        const { name, email, password } = req.body;
+        const updateQuery = `UPDATE users SET name = '${name}', email = '${email}', password = '${password}' WHERE id = '${id}'`;
+    
+        db.query(updateQuery, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error updating user');
+        } else if (result.affectedRows === 0) {
+            res.status(404).send('User not found');
+        } else {
+            res.status(200).send('User updated successfully');
+        }
+        });
     });
-  });
 
   
         // Get all products
@@ -117,7 +131,7 @@ app.put('/users/:id', (req, res) => {
             })
         });
 
-        app.post("/products", (req,res)=>{
+        app.post("/products",async (req,res)=>{
             const { barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, shuma } = req.body;
             try{
         
@@ -133,6 +147,7 @@ app.put('/users/:id', (req, res) => {
         );
     });
     
+
         app.delete("/products/:id", (req,res)=>{
             const productId = req.params.id;
             const q = "DELETE FROM products WHERE id = ?";
@@ -142,26 +157,23 @@ app.put('/users/:id', (req, res) => {
                 return res.json("Products has been deleted sucessfully.");
             })
         })
-    
-        app.put("/products/:id", (req,res)=>{
-            const productId = req.params.id;
-            const q = "UPDATE products SET 'barkodi' = ?, 'emriProduktit' = ?, 'llojiProduktit' = ?, 'sasia' = ?, 'cmimiBlerjes' = ?, 'cmimiShitjes' = ?, 'shuma' = ?";
-    
-            const values = [  
-                req.body.barkodi,
-                req.body.emriProduktit,
-                req.body.llojiProduktit,
-                req.body.sasia,
-                req.body.cmimiBlerjes,
-                req.body.cmimiShitjes,
-                req.body.shuma
-                ]
-    
-            db.query(q,[...values,productId], (err,data)=>{
-                if (err) return res.json(err);
-                return res.json("Products has been updated sucessfully.");
-            })
-        })
+
+        app.put('/products/:id', (req, res) => {
+            const { id } = req.params;
+            const { barkodi, emriProduktit, llojiProduktit, sasia, cmimiBlerjes, cmimiShitjes, shuma} = req.body;
+            const updateQuery = `UPDATE products SET barkodi = '${barkodi}', emriProduktit = '${emriProduktit}', llojiProduktit = '${llojiProduktit}', sasia = '${sasia}', cmimiBlerjes = '${cmimiBlerjes}', cmimiShitjes = '${cmimiShitjes}', shuma = '${shuma}' WHERE id = '${id}'`;
+        
+            db.query(updateQuery, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send('Error updating product');
+            } else if (result.affectedRows === 0) {
+                res.status(404).send('Product not found');
+            } else {
+                res.status(200).send('Product updated successfully');
+            }
+            });
+        });
 
 
         // Get all fatura
@@ -196,22 +208,22 @@ app.put('/users/:id', (req, res) => {
             })
         })
     // Update a payment
-app.put('/fatura/:id', (req, res) => {
-    const { id } = req.params;
-    const { nrFatures, shuma, data } = req.body;
-    const updateQuery = `UPDATE payments SET nrFatures = ${nrFatures}, shuma = ${shuma}, data = '${data}' WHERE id = ${id}`;
-  
-    db.query(updateQuery, (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send('Error updating payment');
-      } else if (result.affectedRows === 0) {
-        res.status(404).send('Payment not found');
-      } else {
-        res.status(200).send('Payment updated successfully');
-      }
-    });
-  });
+    app.put('/fatura/:id', (req, res) => {
+        const { id } = req.params;
+        const { nrFatures, shuma, data } = req.body;
+        const updateQuery = `UPDATE payments SET nrFatures = ${nrFatures}, shuma = ${shuma}, data = '${data}' WHERE id = ${id}`;
+    
+        db.query(updateQuery, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error updating payment');
+        } else if (result.affectedRows === 0) {
+            res.status(404).send('Payment not found');
+        } else {
+            res.status(200).send('Payment updated successfully');
+        }
+        });
+     });
   
     // Get a user by ID
     // app.get('/users/:id', (req, res) => {

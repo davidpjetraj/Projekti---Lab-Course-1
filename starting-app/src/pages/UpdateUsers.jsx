@@ -3,41 +3,43 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const UpdateUsers = () => {
-    const [user, setUser] = useState({
-        name: "",
-        email: "",
-        password: "",       
-    });
+    const [usernameReg, setUsernameReg] = useState("");
+    const [emailReg, setEmailReg] = useState ("");
+    const [passwordReg, setPasswordReg] = useState ("");
 
     const navigate = useNavigate()
     const location = useLocation()
 
     const userId = location.pathname.split("/users")[2]
 
-    const handleChange = (e) => {
-        setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        axios.post('http://localhost:3001/users',  {
+          name: usernameReg,
+          email: emailReg,
+          password: passwordReg
+      }).then(res => {
+        console.log('User has been updated successfully!')
+        navigate('/users')
+          })
+        .catch(err => console.log(err));
+      }
 
-    const handleClick = async e =>{
-        e.preventDefault()
-        try{
-            await axios.put("http://localhost:3001/users/"+ userId, user)
-            navigate("/users")
-        }catch(err){
-            console.log(err)
-        }
-
-    }
-
-    console.log(user)
     return(
         <div className="form">
-            <h1>Update the User</h1>
-            <input type="text" placeholder="Username..." onChange={handleChange} name="name"/>
-            <input type="email" placeholder="Email..." onChange={handleChange} name="email"/>
-            <input type="password" placeholder="Password..." onChange={handleChange} name="password"/>
-            <button onClick={handleClick}>Update</button>
-        
+            <form onSubmit={handleSubmit}>
+                <h1>Update the User</h1>
+                <input type="text" name="name" placeholder="Username ..." onChange={(e) => {
+                    setUsernameReg(e.target.value);
+                    }} />
+                <input type="email" name="email" placeholder="Email ..." onChange={(e) => {
+                    setEmailReg(e.target.value);
+                    }}/>
+                <input type="password" name="password" placeholder="Password ..."  onChange={(e) =>{
+                    setPasswordReg(e.target.value);
+                    }}/>
+                <button type="submit">Update</button>
+            </form>
         </div>
     )
 }
