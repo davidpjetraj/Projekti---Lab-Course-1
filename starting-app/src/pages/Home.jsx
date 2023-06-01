@@ -60,7 +60,6 @@ export const Home = () => {
                     <td>{product.llojiProduktit}</td>
                     <td>{product.sasia}</td>
                     <td>{product.cmimiShitjes}€</td>
-                    <td><button>Add</button></td>
                 </tr>
             ))}
             </tbody>

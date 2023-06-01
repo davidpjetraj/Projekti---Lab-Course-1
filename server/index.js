@@ -1,7 +1,3 @@
-// const express = require('express');
-// const mysql = require("mysql2");
-// const cors = require("cors");
-
 import express from 'express'
 import mysql  from  'mysql'
 import cors from 'cors'
@@ -47,6 +43,8 @@ const db = mysql.createConnection({
     }
   });
 
+
+  
  app.get('/', (req, res) => {
     if(req.session.name) {
         return res.json({valid: true, name: req.session.name})
@@ -225,21 +223,6 @@ const db = mysql.createConnection({
         });
      });
   
-    // Get a user by ID
-    // app.get('/users/:id', (req, res) => {
-    //     const userId = req.params.id;
-    //     db.query('SELECT * FROM users WHERE id = ?', userId, (err, results) => {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     if (results.length === 0) {
-    //         res.status(404).json({ message: 'User not found' });
-    //     } else {
-    //         res.json(results[0]);
-    //     }
-    //     });
-    // });
-
      app.post('/register',async (req, res)=> {
         const { name, email, password } = req.body;
         try{
@@ -256,62 +239,6 @@ const db = mysql.createConnection({
     );
     });
 
-    // app.post('/register', (req, res)=> {
-    //     const sentName = req.body.Name
-    //     const sentEmail = req.body.Email
-    //     const sentPassword = req.body.Password
-
-    //     const SQL = 'INSERT INTO users (name, email, password) VALUES (?,?,?)'
-
-    //     const Values = [sentName, sentEmail, sentPassword]
-        
-    //     db.query(SQL, Values, (err, results)=>{
-    //         if(err){
-    //             res.send(err)
-    //         }
-    //         else{
-    //             console.log('User created successfully')
-    //             res.send({message: "User added!"})
-    //         }
-    //     });
-    // });
-
-    // Update a user by ID
-    // app.put('/users/:id', (req, res) => {
-    //     const userId = req.params.id;
-    //     const { name, username, email, password, role } = req.body;
-    //     db.query(
-    //     'UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE id = ?',
-    //     [name, email, password, role, userId],
-    //     (err) => {
-    //         if (err) {
-    //         throw err;
-    //         }
-    //         res.json({ message: 'User updated successfully' });
-    //     }
-    //     );
-    // });
-
-
-    // app.post('/delete/users/:id', (req, res) => {
-    //     const { id } = req.params;
-      
-    //     const sql = 'DELETE FROM users WHERE id = ?';
-    //     const values = [id];
-      
-    //     db.query(sql, values, (err, result) => {
-    //       if (err) {
-    //         console.error('Error deleting user:', err);
-    //         res.send({ status: 'error' });
-    //       } else {
-    //         if (result.affectedRows > 0) {
-    //           res.send({ status: 'ok' });
-    //         } else {
-    //           res.send({ status: 'not_found' });
-    //         }
-    //       }
-    //     });
-    //   });
 
     app.post("/login", (req, res) => {
         const sql = "SELECT * FROM users WHERE name = ? and password = ?";

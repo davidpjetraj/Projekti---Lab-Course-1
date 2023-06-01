@@ -8,9 +8,7 @@ import Users from './Users';
 import UpdateUsers from './pages/UpdateUsers';
 import Products from './Products';
 import AddProducts  from './AddProducts';
-import Payment from './Payment'
 import Fatura from './Fatura';
-import Settings from './Settings';
 import AddUsers from './pages/AddUsers';
 import UpdateProducts from './pages/UpdateProducts';
 import UpdateFatura from './pages/UpdateFatura';
@@ -28,10 +26,8 @@ root.render(
       <Route path='/products' element={ < Products /> } />
       <Route path='/products/add-products' element={ < AddProducts /> } />
       <Route path='/updateProducts/:id' element={ <UpdateProducts /> } />
-      <Route path='/payments' element={ < Payment /> } />
       <Route path='/fatura' element={ < Fatura /> } />
       <Route path='/updateFatura/:id' element={ <UpdateFatura /> } />
-      <Route path='/settings' element={ < Settings /> } />
     </Routes>
   </BrowserRouter>
 );

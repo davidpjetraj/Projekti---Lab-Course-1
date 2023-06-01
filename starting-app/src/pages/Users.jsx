@@ -30,8 +30,8 @@ export const User = () => {
     return(
         <div className="tabelaa">
             <h1>Users</h1>
-            <div>
-                <button><Link to="/add-users">Add new user</Link></button>
+            <div   className="usertabela">
+                <button className="useraddbt" ><Link to="/add-users">Add new user</Link></button>
                     <form onSubmit={handleDelete}>
                 {users.map(user=>(
                     <div className="user" key={user.id}>

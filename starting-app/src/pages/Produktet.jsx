@@ -33,7 +33,7 @@ export const Produktet = () => {
 
         <div>
             <div className="searchi">
-                <input type="search" placeholder="Kerko Produktin ... " />
+              
                 <button><Link to="/products/add-products"> < BiPlus/> Shto Produkt</Link></button>
 
             </div>
